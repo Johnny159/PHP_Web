@@ -25,18 +25,19 @@ class Login_Control extends Control
         $username = $_POST['username'];
         $password = $_POST['password'];
         $captcha = strtoupper($_POST['captcha']);
-        setcookie('username', $username);
+        setcookie('user[username]', $username);
+        $_COOKIE['user']['username'] = $username;
 
 
 //      todo 验证码
         session_start();
-        echo "Login_Control.login() | 验证码: {$_SESSION['captcha']}<br>";
+//        echo "Login_Control.login() | 验证码: {$_SESSION['captcha']}<br>";
 
 
         if ($captcha === $_SESSION['captcha']) {
 //        if(true){
 
-            echo "Login_Control.login() | 验证码正确<br>";
+//            echo "Login_Control.login() | 验证码正确<br>";
 
             $m = new Login_Model();
 
@@ -46,11 +47,13 @@ class Login_Control extends Control
             if ($data == true) {
 
 //              登陆成功
-                require "./view/index_view.php";
+                require "./view/index_view/index.php";
 
             } else if ($data == false) {
 
 //              登陆失败
+//                require "./view/index_view/index.html";
+
                 require "./view/login_view.php";
             }
 

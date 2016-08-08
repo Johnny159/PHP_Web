@@ -9,7 +9,7 @@
 		    border: 0;
 		    margin: 0;
 		    padding: 0;
-		    font-family: 'Microsoft Yahei', sans-serif;
+		    font-family: '微软雅黑 Light';
 		}
 
 		html {
@@ -56,7 +56,7 @@
 		.container{
 			width: 100%;
 			height: 100%;
-			background: #04859D;
+			background: #1c1d22;
 			position: fixed;
 			text-align: center;
 		}
@@ -69,13 +69,16 @@
 		.login{
 			width: 300px;
 			height: 300px;
-			background: #60BDCE;
+			background: #2a2b30;
 			display: inline-block;
 			vertical-align: middle;
-			border-radius: 5px;	
+			border-radius: 5px;
+			/*border: solid 2px #5c5edc;*/
+
 		}
 		.login h1{
-			color: white;
+			/*color: #cecece;*/
+			color: #5c5edc;
 			margin-top: 30px;
 		}
 		.login input{
@@ -83,7 +86,12 @@
 			width: 200px;
 			height: 25px;
 			margin-top: 25px; 
-			border-radius: 2px;	
+			border-radius: 2px;
+			color: #5c5edc;
+			font-weight: 900;
+			background: #cecece;
+
+
 
 		}
 		.login input[name='captcha']{

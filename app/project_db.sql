@@ -6,7 +6,7 @@ create database mydb_1
 use mydb_1;
 
 
--- 玩家会员等级价格
+-- 会员等级规则
 create table tb_vip(
 	id int(2) primary key auto_increment,
 	level varchar(4) not null unique,
@@ -46,32 +46,8 @@ create table tb_player(
 );
 
 
--- 玩家赛事记录
-create table tb_player_map_record(
-	username varchar(20),
-	stage_id int(3),
-	locked boolean,
-	primary key(username, stage_id),
-	foreign key (stage_id) references tb_map(stage_id),
-	foreign key (username) references tb_player(username)
-);
-
-
--- 玩家赛段记录
-create table tb_player_map_record(
-	username varchar(20),
-	stage_id int(3),
-	map_id int(3),
-	star int(2),
-	primary key(username, stage_id, map_id),
-	foreign key (stage_id) references tb_map(stage_id),
-	foreign key (map_id) references tb_map(map_id),
-	foreign key (username) references tb_player(username)
-);
-
-
 -- 商品
-create table tb_shopitem(
+create table tb_equip(
 	id int(4) primary key,
 	name char(10) not null,
 	img_1 varchar(20) not null,
@@ -127,15 +103,17 @@ create table tb_menu(
 	url varchar(32)
 );
 insert into tb_menu values
-	(1, '菜单1', 0, 'www1'),
-	(2, '菜单2', 0, 'www2'),
-	(3, '菜单3', 0, 'www3'),
-	(4, '子菜单1', 1, 'www4'),
-	(5, '子菜单2', 1, 'www5'),
-	(6, '子菜单3', 1, 'www6'),
-	(7, '子菜单4', 2, 'www7'),
-	(8, '子菜单5', 2, 'www8'),
-	(9, '子菜单6', 3, 'www9'),
-	(10, '子菜单7', 3, 'www10'),
-	(11, '子菜单8', 3, 'www11');
+	(1, '玩家管理', 0, 'www1'),
+	(2, '游戏设定', 0, 'www2'),
+	(3, '游戏过程', 0, 'www3'),
+	(4, '运营统计', 0, 'www4'),
+	(5, '公告管理', 2, 'www5'),
+	(6, 'VIP 规则', 2, 'www6'),
+	(7, '赛事管理', 2, 'www7'),
+	(8, '交易物品管理', 2, 'www8'),
+	(9, '营收分析', 4, 'www9'),
+	(10, '玩家分析', 4, 'www10'),
+	(11, '交易分析', 4, 'www11'),
+	(12, '游戏分析', 4, 'www12');
 
+-- 公告

@@ -42,7 +42,7 @@
         <div class="header">
         	<h1>越野机车后台管理系统</h1>
             <span><?php
-                echo $_COOKIE['username'],"，你好！";
+                echo $_COOKIE['user']['username'],"，你好！";
                 echo "<a href=index.php?ctrl=Index&act=logout>注销</a>"
             ?></span>
         </div>
@@ -56,7 +56,7 @@
             
         	</div>
         	<div class="content_main">
-                
+
         	</div>
         </div>
         <div class="footer"></div>

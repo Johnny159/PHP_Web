@@ -37,7 +37,8 @@ class Factory
                 $file_name = $d . $class_name . '.class.php';
                 if (file_exists($file_name)) {
                     require_once $file_name;
-                    echo '__autoload() | 导入 {'.$file_name.'} 成功<br>';
+//                    echo '__autoload() | 导入 {'.$file_name.'} 成功<br>';
+                    error_log('__autoload() | 导入 {'.$file_name.'} 成功<br>');
 
                     $is_loaded = true;
                     break;
@@ -46,7 +47,7 @@ class Factory
 
             // 错误处理
             if($is_loaded == null){
-                echo "__autoload() | {$class_name} 类无法导入";
+//                echo "__autoload() | {$class_name} 类无法导入";
                 error_log("{$class_name} 类无法导入");
             }
         }

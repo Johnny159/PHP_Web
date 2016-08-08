@@ -20,7 +20,7 @@ class Index_Control extends Control
     function logout()
     {
         // todo 登出 删除 cookie
-        setcookie('username', null, time()-1);
+        setcookie('user', null, time()-1);
         require './view/login_view.php';
     }
 
