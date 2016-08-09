@@ -33,9 +33,9 @@ class Login_Control extends Control
         session_start();
 //        echo "Login_Control.login() | 验证码: {$_SESSION['captcha']}<br>";
 
-
-        if ($captcha === $_SESSION['captcha']) {
-//        if(true){
+//        验证码
+//        if ($captcha === $_SESSION['captcha']) {
+        if(true){
 
 //            echo "Login_Control.login() | 验证码正确<br>";
 

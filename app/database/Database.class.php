@@ -66,14 +66,15 @@ class Database {
 	// 单例 toddo
 	static function getinstance($config){
 		if(self::$instance == null){
-			self::$instance = true;
-			return new Database($config);
+			self::$instance = new Database($config);
 		}
+		return self::$instance;
 	}
 
 	// 查询
 	function select($select='*', $from, $where='true'){
 		$sql = "select {$select} from {$from} where {$where} ;";
+		error_log($sql) ;
 
 		$rs = mysql_query($sql);
 		$this->rs = $rs;
@@ -92,7 +93,8 @@ class Database {
 	// 修改
 	function update($update, $set, $where){
 		$sql = "update {$update} set {$set} where {$where};";
-		mysql_query($sql);
+		$rs = mysql_query($sql);
+		return $rs;
 	}
 
 	// // todo 删除

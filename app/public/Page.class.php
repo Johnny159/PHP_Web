@@ -95,40 +95,40 @@ class Page{
 
 // ------------------------------------------------------------
 
-require 'config.php';
-require 'Database.class.php';
-
-// 数据库
-$db = Database::getinstance($config);
-
-// 分页
-$page = new Page(3, "select count(*) as count from tb_admin;");
-$page_data = $page -> select_data("select * from tb_admin");
-// print_r($page_data);
-
-// 数据显示
-foreach($page_data as $item){
-
-	echo '<table border=1>';
-	echo '<tr>';
-
-	foreach ($item as $key => $value) {
-		echo '<td>';
-		echo $value;
-		echo '</td>';
-	}
-
-	echo '</tr>';
-	echo '</table>';
-}
-// var_dump($page->page_count);
-// var_dump($page->page_current);
-echo "共{$page -> page_count}页 当前第{$page -> page_current}页";
-
-if(!$_GET['page_current']){
-	echo "<a href='page.class.php?page_current=".(2)."'>下一页</a>";
-}else if($_GET['page_current'] < $page -> page_count){
-	echo "<a href='page.class.php?page_current=".($_GET['page_current']+1)."'>下一页</a>";
-}
+//require 'config.php';
+//require 'Database.class.php';
+//
+//// 数据库
+//$db = Database::getinstance($config);
+//
+//// 分页
+//$page = new Page(3, "select count(*) as count from tb_admin;");
+//$page_data = $page -> select_data("select * from tb_admin");
+//// print_r($page_data);
+//
+//// 数据显示
+//foreach($page_data as $item){
+//
+//	echo '<table border=1>';
+//	echo '<tr>';
+//
+//	foreach ($item as $key => $value) {
+//		echo '<td>';
+//		echo $value;
+//		echo '</td>';
+//	}
+//
+//	echo '</tr>';
+//	echo '</table>';
+//}
+//// var_dump($page->page_count);
+//// var_dump($page->page_current);
+//echo "共{$page -> page_count}页 当前第{$page -> page_current}页";
+//
+//if(!$_GET['page_current']){
+//	echo "<a href='page.class.php?page_current=".(2)."'>下一页</a>";
+//}else if($_GET['page_current'] < $page -> page_count){
+//	echo "<a href='page.class.php?page_current=".($_GET['page_current']+1)."'>下一页</a>";
+//}
 
 ?>

@@ -3,7 +3,8 @@
 class Model{
 	protected $db;
 	function __construct(){
-		$this-> db = Database::getinstance(include '../config.php');
+		include './database/config.php';
+		$this->db = Database::getinstance($config);
 	}
 }
 

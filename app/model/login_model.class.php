@@ -56,13 +56,10 @@ class Login_Model
                     return true;
                 };
             }
-
-
         }
 
         error_log("Login_Model.login() |" . $php_errormsg);
 
-//        return "Login_Model.login() |";
 
     }
 }

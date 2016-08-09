@@ -43,68 +43,20 @@
     <nav id="ml-menu" class="menu">
         <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
         <div class="menu__wrap">
-            <ul data-menu="main" class="menu__level">
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-1" href="#">玩家管理</a></li>
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-2" href="#">游戏设定</a></li>
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-3" href="#">游戏过程 </a></li>
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-4" href="#">运营统计</a></li>
-            </ul>
-            <!-- Submenu 1 -->
-            <ul data-menu="submenu-1" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">玩家管理</a></li>
-                <li class="menu__item"><a class="menu__link" href="#"></a></li>
-                <li class="menu__item"><a class="menu__link" href="#"></a></li>
-                <li class="menu__item"><a class="menu__link" href="#"></a></li>
-                <li class="menu__item"><a class="menu__link" href="#"></a></li>
-                <!--<li class="menu__item"><a class="menu__link" data-submenu="submenu-1-1" href="#"></a></li>-->
-            </ul>
-            <!-- Submenu 1-1 -->
-            <!--				<ul data-menu="submenu-1-1" class="menu__level">-->
-            <!--					<li class="menu__item"><a class="menu__link" href="#">Homemade</a></li>-->
-            <!--				</ul>-->
-            <!-- Submenu 2 -->
-            <ul data-menu="submenu-2" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">公告管理</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">VIP 规则</a></li>
-                <!--<li class="menu__item"><a class="menu__link" data-submenu="submenu-2-1" href="#">Special Selection</a></li>-->
-                <li class="menu__item"><a class="menu__link" href="#">赛事管理</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">交易物品管理</a></li>
-            </ul>
-            <!-- Submenu 2-1 -->
-            <!--				<ul data-menu="submenu-2-1" class="menu__level">-->
-            <!--					<li class="menu__item"><a class="menu__link" href="#">Exotic Mixes</a></li>-->
-            <!--				</ul>-->
-            <!-- Submenu 3 -->
-            <ul data-menu="submenu-3" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">游戏过程</a></li>
-                <li class="menu__item"><a class="menu__link" href="#"></a></li>
-                <li class="menu__item"><a class="menu__link" href="#"></a></li>
-                <li class="menu__item"><a class="menu__link" href="#"></a></li>
-                <li class="menu__item"><a class="menu__link" href="#"></a></li>
-                <!--<li class="menu__item"><a class="menu__link" data-submenu="submenu-3-1" href="#">Promo Packs</a></li>-->
-            </ul>
-            <!-- Submenu 3-1 -->
-            <!--				<ul data-menu="submenu-3-1" class="menu__level">-->
-            <!--					<li class="menu__item"><a class="menu__link" href="#">Starter Kit</a></li>-->
-            <!--				</ul>-->
-            <!-- Submenu 4 -->
-            <ul data-menu="submenu-4" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">营收分析</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">玩家分析</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">交易分析</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">游戏分析</a></li>
-                <!--<li class="menu__item"><a class="menu__link" data-submenu="submenu-4-1" href="#">Selection</a></li>-->
-            </ul>
-            <!-- Submenu 4-1 -->
-            <!--				<ul data-menu="submenu-4-1" class="menu__level">-->
-            <!--					<li class="menu__item"><a class="menu__link" href="#">Nut Mylk Packs</a></li>-->
-            <!--				</ul>-->
+
+            <?php
+                $c = new Index_Control();
+                echo $c -> menu();
+            ?>
+
+
         </div>
     </nav>
     <div class="content">
         <!--<p class="info">Please choose a category</p>-->
         <!-- Ajax loaded content here -->
-        <iframe width="100%" height="350px" src=""></iframe>
+
+        <iframe id="_frame" width="100%" height="500px" src="fgh" ></iframe>
     </div>
 </div>
 <!-- /view -->
@@ -149,18 +101,34 @@
             setTimeout(function () {
                 classie.remove(gridWrapper, 'content--loading');
 //                gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '<ul>';
-                gridWrapper.innerHTML = '<p>'+ev.target+'</p>'+'<iframe width="100%" height="350px" src=""></iframe>';
-                console.log(ev);
-                console.log(ev.target);
-                console.log($(ev.target).attr("class"));
-            }, 700);
+                gridWrapper.innerHTML = '<iframe id="frame" width="100%" height="500px" src="" ></iframe>';
+
+                // todo 修改 iframe src
+                $("#frame").attr("src", $(ev.target).attr("data-url"));
+
+//                alert();
+
+
+// todo 载入动画 700ms
+            }, 0);
         }
     })();
 
     $(function(){
-        $('.menu__item').click(function(){
-//            alert()
-        })
+        $("ul[data-menu='main'] > .menu__item").click(function(){
+//            var r = $(this).attr("data-submenu");
+            var index = $(this).children("a").attr("data-submenu");
+//            alert(index);
+            setTimeout(function(){
+                $("[data-menu="+index+"]").children("li:eq(0)").click();
+            },1000);
+        });
+
+
+
+
+
+
 
     })
 
