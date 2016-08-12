@@ -6,14 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>越野机车后台管理系统</title>
-    <!-- food icons -->
-    <!--<link rel="stylesheet" type="text/css" href="css/organicfoodicons.css" />-->
     <!-- demo styles -->
     <link rel="stylesheet" type="text/css" href="./view/index_view/css/demo.css"/>
     <!-- menu styles -->
     <link rel="stylesheet" type="text/css" href="./view/index_view/css/component.css"/>
     <script src="./view/index_view/js/modernizr-custom.js"></script>
     <script src="./js/jquery-1.12.0.min.js"></script>
+    <style>
+
+        iframe {
+            border: none;
+        }
+
+        *{
+            text-align: center;
+        }
+
+        table{
+
+            margin: 20px auto ;
+        }
+        table a{
+            color:#333333;
+            cursor: pointer;
+        }
+
+        table.gridtable {
+            font-size:11px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+        }
+        table.gridtable th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #cecece;
+        }
+        table.gridtable td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -63,6 +103,8 @@
 <script src="./view/index_view/js/classie.js"></script>
 <!--<script src="./view/index_view/js/dummydata.js"></script>-->
 <script src="./view/index_view/js/main.js"></script>
+
+
 <script>
     (function () {
         var menuEl = document.getElementById('ml-menu'),

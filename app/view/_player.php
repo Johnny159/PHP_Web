@@ -8,7 +8,7 @@
 
 $html = <<<EOD
         <input type='text' name='keyword'/>
-        <button><a  id='_search' href='index.php?ctrl=Index&act=player'>搜索</a></button>
+        <button><a  id='_search' href='index.php?ctrl=Index&act=player&undo=true'>搜索</a></button>
     <table class='gridtable'>
     <tr>
         <th>用户名</th>
@@ -102,7 +102,12 @@ echo '<div class="md-modal md-effect-1" id="modal-1">
 
         // 搜索框
         $("input[name=keyword]").change(function () {
-            $("#_search").attr("href", "index.php?ctrl=Index&act=player&keyword=" + $(this).val())
+            if($(this).val()){
+                $("#_search").attr("href", "index.php?ctrl=Index&act=player&keyword=" + $(this).val())
+            }else{
+                $("#_search").attr("href", "index.php?ctrl=Index&act=player&undo=true")
+
+            }
         });
 
 
@@ -145,3 +150,49 @@ echo '<div class="md-modal md-effect-1" id="modal-1">
 
 
 </script>
+
+<!--主样式-->
+<link rel="stylesheet" type="text/css" href="./view/index_view/css/demo.css"/>
+<!--菜单样式-->
+<link rel="stylesheet" type="text/css" href="./view/index_view/css/component.css"/>
+<!--模态框-->
+<link rel="stylesheet" type="text/css" href="./view/_modal_window/css/style.css"/>
+<script src="./view/_modal_window/js/index.js"></script>
+
+<style>
+
+    *{
+        text-align: center;
+    }
+
+    table{
+
+        margin: 20px auto ;
+    }
+    table a{
+        color:#333333;
+        cursor: pointer;
+    }
+
+    table.gridtable {
+        font-size:11px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+    }
+    table.gridtable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #cecece;
+    }
+    table.gridtable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #ffffff;
+    }
+</style>

@@ -87,22 +87,28 @@ class Database {
 		$this->rs_arr = $rs_arr;
 
 		return $rs_arr;
-//		return $rs_arr;
 	}
 
 	// 修改
 	function update($update, $set, $where){
 		$sql = "update {$update} set {$set} where {$where};";
 		$rs = mysql_query($sql);
+
+		return $sql;
 		return $rs;
 	}
 
 	// // todo 删除
 	// function delete(){}
 
-	// // todo 插入
-	// function insert(){
-	// 	$sql = "insert into {$insert} values({});"
-	// }
+	 // todo 插入
+	 function insert($insert,$item, $values){
+	 	$sql = "insert into {$insert} ({$item}) values({$values});";
+		 $rs = mysql_query($sql);
+
+		 return $sql;
+		 return $rs;
+
+	 }
 }
 ?>

@@ -21,12 +21,14 @@ class Index_Control extends Control
         }
     }
 
+
     function logout()
     {
         // todo 登出 删除 cookie
         setcookie('user', null, time() - 1);
         require './view/login_view.php';
     }
+
 
     function menu()
     {
@@ -71,9 +73,13 @@ class Index_Control extends Control
 
     function player()
     {
-        if($_GET['keyword']){
+        if ($_GET['keyword']) {
             $_COOKIE['player']['keyword'] = $_GET['keyword'];
             setcookie('player[keyword]', $_GET['keyword']);
+        }
+        if ($_GET['undo'] == 'true') {
+            $_COOKIE['player']['keyword'] = null;
+            setcookie('player[keyword]', null, time() - 1);
         }
         $m = new Index_Model();
         $data = $m->player()[0];
@@ -81,24 +87,28 @@ class Index_Control extends Control
         require './view/_player.php';
     }
 
-    function player_data(){
+
+    function player_data()
+    {
         $username = $_GET['username'];
 
         $m = new Index_Model();
-        $data = $m -> player_data($username)[0];
+        $data = $m->player_data($username)[0];
 //        var_dump($data);
         require './view/_player_data.php';
     }
 
-    function player_equip(){
-        if($_GET['username']){
+
+    function player_equip()
+    {
+        if ($_GET['username']) {
             $username = $_GET['username'];
             setcookie('player[username]', $username);
-        }else{
+        } else {
             $username = $_COOKIE['player']['username'];
         }
         $m = new Index_Model();
-        $return = $m -> player_equip($username);
+        $return = $m->player_equip($username);
         $data = $return[0];
         $page = $return[1];
 
@@ -108,15 +118,16 @@ class Index_Control extends Control
     }
 
 
-    function player_charge(){
-        if($_GET['username']){
+    function player_charge()
+    {
+        if ($_GET['username']) {
             $username = $_GET['username'];
             setcookie('player[username]', $username);
-        }else{
+        } else {
             $username = $_COOKIE['player']['username'];
         }
         $m = new Index_Model();
-        $return = $m -> player_equip($username);
+        $return = $m->player_equip($username);
         $data = $return[0];
         $page = $return[1];
 
@@ -125,15 +136,16 @@ class Index_Control extends Control
     }
 
 
-    function player_exp(){
-        if($_GET['username']){
+    function player_exp()
+    {
+        if ($_GET['username']) {
             $username = $_GET['username'];
             setcookie('player[username]', $username);
-        }else{
+        } else {
             $username = $_COOKIE['player']['username'];
         }
         $m = new Index_Model();
-        $return = $m -> player_exp($username);
+        $return = $m->player_exp($username);
         $data = $return[0];
         $page = $return[1];
 
@@ -141,28 +153,36 @@ class Index_Control extends Control
         require './view/_player_exp.php';
     }
 
-    function player_lock(){
+
+    function player_lock()
+    {
         error_log($_GET['lock']);
 
-        if($_GET['lock']){
+        if ($_GET['lock']) {
             $username = $_GET['lock'];
             $m = new Index_Model();
-            $data = $m -> player_lock($username);
+            $data = $m->player_lock($username);
             var_dump($data);
-        }
-        else if($_GET['unlock']){
+        } else if ($_GET['unlock']) {
             $username = $_GET['unlock'];
             $m = new Index_Model();
-            $data = $m -> player_unlock($username);
+            $data = $m->player_unlock($username);
             var_dump($data);
         }
     }
 
-    function setting(){
 
-        if($_GET['keyword']){
+    function setting()
+    {
+
+        if ($_GET['keyword']) {
             $_COOKIE['setting']['keyword'] = $_GET['keyword'];
             setcookie('setting[keyword]', $_GET['keyword']);
+        }
+
+        if ($_GET['undo'] == 'true') {
+            $_COOKIE['setting']['keyword'] = null;
+            setcookie('setting[keyword]', null, time() - 1);
         }
         $m = new Index_Model();
         $data = $m->setting()[0];
@@ -172,4 +192,149 @@ class Index_Control extends Control
         require './view/_setting_notice.php';
     }
 
+
+    function setting_notice_change()
+    {
+        $id = $_POST['id'];
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $active_time = $_POST['active_time'];
+//        var_dump($_POST) ;
+        $m = new Index_Model();
+        $data = $m->setting_notice_change($id, $title, $content, $active_time);
+//        var_dump($data);
+
+    }
+
+
+    function setting_notice_delete()
+    {
+        $id = $_POST['id'];
+        $m = new Index_Model();
+        $data = $m->setting_notice_delete($id);
+        var_dump($data);
+    }
+
+
+    function setting_notice_insert()
+    {
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $active_time = $_POST['active_time'];
+        $m = new Index_Model();
+        $data = $m->setting_notice_insert($title, $content, $active_time);
+        var_dump($data);
+    }
+
+
+    function setting_vip()
+    {
+        $m = new Index_Model();
+        $data = $m->setting_vip()[0];
+        $page = $m->setting_vip()[1];
+
+        require './view/_setting_vip.php';
+    }
+
+
+    function setting_vip_insert()
+    {
+        $vip = $_POST['vip'];
+        $price = $_POST['price'];
+        $m = new Index_Model();
+        $data = $m->setting_vip_insert($vip, $price);
+        var_dump($data);
+    }
+
+
+    function setting_vip_delete()
+    {
+        $id = $_POST['id'];
+        $m = new Index_Model();
+        $data = $m->setting_vip_delete($id);
+        var_dump($data);
+    }
+
+
+    function setting_vip_change()
+    {
+        $id = $_POST['id'];
+        $vip = $_POST['vip'];
+        $price = $_POST['price'];
+        $m = new Index_Model();
+        $data = $m->setting_vip_change($id, $vip, $price);
+        var_dump($data);
+    }
+
+
+    function setting_stage()
+    {
+
+        if ($_POST['get_data'] == 1) {
+            $m = new Index_Model();
+            $data = $m->setting_stage();
+            echo json_encode($data);
+        } else {
+            require './view/_setting_stage.php';
+        }
+    }
+
+
+    function setting_stage_search()
+    {
+
+        if ($id = $_POST['id']) {
+            $m = new Index_Model();
+            $data = $m->setting_stage_search($id);
+            echo json_encode($data);
+        }
+    }
+
+
+    function setting_stage_insert_stage(){
+
+        var_dump($_POST);
+        var_dump($_FILES);
+
+        $filename_1 = $_FILES['img_1']['tmp_name'];
+        $destination_1 = '../game/upload/'.$_FILES['img_1']['name'];
+        move_uploaded_file($filename_1, $destination_1);
+
+        $filename_2 = $_FILES['img_2']['tmp_name'];
+        $destination_2 = '../game/upload/'.$_FILES['img_2']['name'];
+        move_uploaded_file($filename_2, $destination_2);
+
+        // todo 写入数据库
+        $level = $_POST['vip'];
+        $img_1 = $destination_1;
+        $img_2 = $destination_2;
+//        var_dump([$level, $img_1, $img_2]);
+
+        $m = new Index_Model();
+        $data = $m -> setting_stage_insert_stage($level, $img_1, $img_2);
+        echo $data;
+    }
+
+    function setting_stage_insert_map(){
+
+        $filename_1 = $_FILES['img_1']['tmp_name'];
+        $destination_1 = '../game/upload/'.$_FILES['img_1']['name'];
+        move_uploaded_file($filename_1, $destination_1);
+
+        $filename_2 = $_FILES['img_2']['tmp_name'];
+        $destination_2 = '../game/upload/'.$_FILES['img_2']['name'];
+        move_uploaded_file($filename_2, $destination_2);
+
+        $stage_id =  $_POST['stage_id'];
+        $name =  $_POST['map'];
+        $img_1 =  $destination_1;
+        $img_2 =  $destination_2;
+        $exp =  $_POST['exp'];
+        $coins =  $_POST['coins'];
+        $map_id =  $_POST['map_id'];
+
+        $m = new Index_Model();
+        $data = $m -> setting_stage_insert_map($stage_id, $name, $img_1, $img_2, $exp, $coins, $map_id);
+        echo $data;
+    }
 }
