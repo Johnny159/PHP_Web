@@ -291,17 +291,18 @@ class Index_Control extends Control
     }
 
 
-    function setting_stage_insert_stage(){
+    function setting_stage_insert_stage()
+    {
 
         var_dump($_POST);
         var_dump($_FILES);
 
         $filename_1 = $_FILES['img_1']['tmp_name'];
-        $destination_1 = '../game/upload/'.$_FILES['img_1']['name'];
+        $destination_1 = '../game/upload/' . $_FILES['img_1']['name'];
         move_uploaded_file($filename_1, $destination_1);
 
         $filename_2 = $_FILES['img_2']['tmp_name'];
-        $destination_2 = '../game/upload/'.$_FILES['img_2']['name'];
+        $destination_2 = '../game/upload/' . $_FILES['img_2']['name'];
         move_uploaded_file($filename_2, $destination_2);
 
         // todo 写入数据库
@@ -311,30 +312,175 @@ class Index_Control extends Control
 //        var_dump([$level, $img_1, $img_2]);
 
         $m = new Index_Model();
-        $data = $m -> setting_stage_insert_stage($level, $img_1, $img_2);
+        $data = $m->setting_stage_insert_stage($level, $img_1, $img_2);
         echo $data;
     }
 
-    function setting_stage_insert_map(){
+    function setting_stage_insert_map()
+    {
 
         $filename_1 = $_FILES['img_1']['tmp_name'];
-        $destination_1 = '../game/upload/'.$_FILES['img_1']['name'];
+        $destination_1 = '../game/upload/' . $_FILES['img_1']['name'];
         move_uploaded_file($filename_1, $destination_1);
 
         $filename_2 = $_FILES['img_2']['tmp_name'];
-        $destination_2 = '../game/upload/'.$_FILES['img_2']['name'];
+        $destination_2 = '../game/upload/' . $_FILES['img_2']['name'];
         move_uploaded_file($filename_2, $destination_2);
 
-        $stage_id =  $_POST['stage_id'];
-        $name =  $_POST['map'];
-        $img_1 =  $destination_1;
-        $img_2 =  $destination_2;
-        $exp =  $_POST['exp'];
-        $coins =  $_POST['coins'];
-        $map_id =  $_POST['map_id'];
+        $stage_id = $_POST['stage_id'];
+        $name = $_POST['map'];
+        $img_1 = $destination_1;
+        $img_2 = $destination_2;
+        $exp = $_POST['exp'];
+        $coins = $_POST['coins'];
+        $map_id = $_POST['map_id'];
 
         $m = new Index_Model();
-        $data = $m -> setting_stage_insert_map($stage_id, $name, $img_1, $img_2, $exp, $coins, $map_id);
+        $data = $m->setting_stage_insert_map($stage_id, $name, $img_1, $img_2, $exp, $coins, $map_id);
         echo $data;
     }
+
+    function setting_stage_delete()
+    {
+        $id = $_POST['id'];
+        $m = new Index_Model();
+        echo $id;
+
+        if ($id > 1000) {
+            $stage_id = floor($id / 1000);
+            $map_id = $id % 1000;
+            $data = $m->setting_stage_delete_map($stage_id, $map_id);
+        } elseif ($id <= 1000) {
+            $data = $m->setting_stage_delete_stage($id);
+
+        }
+    }
+
+    function setting_stage_change_map()
+    {
+        var_dump($_FILES);
+
+        $filename_1 = $_FILES['img_1']['tmp_name'];
+        $destination_1 = '../game/upload/' . $_FILES['img_1']['name'];
+        move_uploaded_file($filename_1, $destination_1);
+
+        $filename_2 = $_FILES['img_2']['tmp_name'];
+        $destination_2 = '../game/upload/' . $_FILES['img_2']['name'];
+        move_uploaded_file($filename_2, $destination_2);
+
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $img_1 = $destination_1;
+        $img_2 = $destination_2;
+        $exp = $_POST['exp'];
+        $coins = $_POST['coins'];
+        $stage_id = floor($id / 1000);
+        $map_id = $id % 1000;
+
+        $m = new Index_Model();
+        $data = $m->setting_stage_change_map($name, $img_1, $img_2, $exp, $coins, $stage_id, $map_id);
+        var_dump($data);
+    }
+
+    function setting_stage_change_stage()
+    {
+        $filename_1 = $_FILES['img_1']['tmp_name'];
+        $destination_1 = '../game/upload/' . $_FILES['img_1']['name'];
+        move_uploaded_file($filename_1, $destination_1);
+
+        $filename_2 = $_FILES['img_2']['tmp_name'];
+        $destination_2 = '../game/upload/' . $_FILES['img_2']['name'];
+        move_uploaded_file($filename_2, $destination_2);
+
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $img_1 = $destination_1;
+        $img_2 = $destination_2;
+
+        $m = new Index_Model();
+        $data = $m->setting_stage_change_stage($id, $name, $img_1, $img_2);
+        var_dump($data);
+    }
+
+    function setting_item()
+    {
+        if ($_POST['get_data'] == 1) {
+            $m = new Index_Model();
+            $data = $m->setting_item();
+            echo json_encode($data);
+        } else {
+            require './view/_setting_item.php';
+        }
+    }
+
+    function setting_item_search()
+    {
+
+        if ($id = $_POST['id']) {
+            $m = new Index_Model();
+            $data = $m->setting_item_search($id);
+            echo json_encode($data);
+        }
+    }
+
+    function setting_item_insert()
+    {
+
+        $filename_1 = $_FILES['img_1']['tmp_name'];
+        $destination_1 = '../game/upload/' . $_FILES['img_1']['name'];
+        move_uploaded_file($filename_1, $destination_1);
+
+        $filename_2 = $_FILES['img_2']['tmp_name'];
+        $destination_2 = '../game/upload/' . $_FILES['img_2']['name'];
+        move_uploaded_file($filename_2, $destination_2);
+
+        // todo 写入数据库
+        $vip = $_POST['vip'];
+        $name = $_POST['name'];
+        $func_value = $_POST['func_value'];
+        $type = $_POST['type'];
+
+        $img_1 = $destination_1;
+        $img_2 = $destination_2;
+//        var_dump([$level, $img_1, $img_2]);
+
+        $m = new Index_Model();
+        $data = $m->setting_item_insert($vip, $img_1, $img_2, $type, $func_value, $name);
+        echo $data;
+    }
+
+    function setting_item_delete()
+    {
+        $id = $_POST['id'];
+        $m = new Index_Model();
+
+        $data = $m->setting_item_delete($id);
+        echo $data;
+
+    }
+
+    function setting_item_update(){
+
+        $filename_1 = $_FILES['img_1']['tmp_name'];
+        $destination_1 = '../game/upload/' . $_FILES['img_1']['name'];
+        move_uploaded_file($filename_1, $destination_1);
+
+        $filename_2 = $_FILES['img_2']['tmp_name'];
+        $destination_2 = '../game/upload/' . $_FILES['img_2']['name'];
+        move_uploaded_file($filename_2, $destination_2);
+
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $img_1 = $destination_1;
+        $img_2 = $destination_2;
+        $func_value = $_POST['func_value'];
+        $vip = $_POST['vip'];
+
+
+        $m = new Index_Model();
+        $data = $m->setting_item_update($name, $img_1, $img_2, $id, $func_value, $vip);
+        var_dump($data);
+    }
+
+
 }

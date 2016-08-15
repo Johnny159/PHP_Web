@@ -64,7 +64,7 @@ echo '<div class="md-modal md-effect-1" id="modal-1">
 				    <button>拥有角色/装备</button>
 				    <button>充值记录</button>
 				    <button>经验记录</button>
-                    <iframe width="100%" height="250px" id="player_window"></iframe><br>
+                    <iframe width="100%" height="250px" id="player_window" style="border:none"></iframe><br>
 					<button class="md-close">关闭</button>
 				</div>
 			</div>

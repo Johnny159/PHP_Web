@@ -15,7 +15,7 @@
     <button class="md-trigger" data-modal="modal-2">添加赛段</button>
     <br>
     <button class="md-trigger" data-modal="modal-3">删除</button>
-    <button class="md-trigger" data-modal="modal-4">更改</button>
+    <button class="" data-modal="modal-4">更改</button>
     <br>
     <ul id="_stage_tree" class="ztree"></ul>
 </div>
@@ -52,6 +52,7 @@
 <div class="md-modal md-effect-1" id="modal-1" style="width: 30%">
     <div class="md-content" style="width: 100%">
         <h3>添加赛事</h3>
+
         <div>
             <form action="./index.php?ctrl=index&act=setting_stage_insert_stage" enctype="multipart/form-data"
                   method="post" id="_stage_update">
@@ -118,14 +119,75 @@
 </div>
 
 
-<!--赛事赛段更改-->
+<!--赛事更改-->
 <div class="md-modal md-effect-1" id="modal-4" style="width: 30%">
     <div class="md-content" style="width: 100%">
-        <h3>更改</h3>
+        <h3>赛事更改</h3>
 
         <div>
         </div>
         <button class="md-close">关闭</button>
+    </div>
+</div>
+
+
+<!--赛段更改-->
+<button id="_map_change_button" class="md-trigger" data-modal="modal-7" style="display: none">确定</button>
+<div class="md-modal md-effect-1" id="modal-7" style="width: 30%">
+    <div class="md-content" style="width: 100%">
+        <h3>赛段更改</h3>
+
+        <div>
+            <form action="./index.php?ctrl=index&act=setting" enctype="multipart/form-data" method="post"
+                  id="_map_change">
+                <!--                赛事:-->
+                <!--                <select name="stage_id" style="width:150px;">-->
+                <!--                </select><br><br>-->
+                赛段名:
+                <input type="text" name="name" style="width:150px;"/><br><br>
+                &nbsp;图片1:
+                <input type="file" name="img_1" style="width:150px;"/><br>
+                <img class="_pre_1" style="max-width:50px;"><br>
+                &nbsp;图片2:
+                <input type="file" name="img_2" style="width:150px;"/><br><br>
+                <img class="_pre_2" style="max-width:50px;"><br>
+                &nbsp;奖励经验:
+                <input type="number" name="exp" min="0" style="width:150px;"/><br><br>
+                &nbsp;奖励金币:
+                <input type="number" name="coins" min="0" style="width:150px;"/><br><br>
+                <input type="hidden" name="id">
+            </form>
+            <button class="_confirm">确定</button>
+            <button class="md-close">关闭</button>
+        </div><br>
+
+    </div>
+</div>
+
+
+<!--赛事更改-->
+<button id="_stage_change_button" class="md-trigger" data-modal="modal-8" style="display: none">确定</button>
+<div class="md-modal md-effect-1" id="modal-8" style="width: 30%">
+    <div class="md-content" style="width: 100%">
+        <h3>赛事更改</h3>
+        <div>
+            <form action="./index.php?ctrl=index&act=setting" enctype="multipart/form-data" method="post"
+                  id="_stage_change">
+
+                赛事名:
+                <input type="text" name="name" style="width:150px;"/><br><br>
+                &nbsp;图片1:
+                <input type="file" name="img_1" style="width:150px;"/><br>
+                <img id="_pre_1" style="max-width:50px;"><br>
+                &nbsp;图片2:
+                <input type="file" name="img_2" style="width:150px;"/><br><br>
+                <img id="_pre_2" style="max-width:50px;"><br>
+
+                <input type="hidden" name="id">
+            </form>
+            <button class="_confirm">确定</button>
+            <button class="md-close">关闭</button>
+        </div><br>
 
     </div>
 </div>
@@ -147,7 +209,7 @@
     <div class="md-content" style="width: 100%">
         <div>
             <p>操作成功</p>
-            <button class="md-close">关闭</button>
+            <button class="md-close"><a href="index.php?ctrl=Index&act=setting_stage">关闭</a></button>
         </div>
     </div>
 </div>
@@ -174,9 +236,6 @@
 <script>
 
     $(function () {
-
-
-
         // 点击菜单回调
         function zTreeBeforeClick(treeId, treeNode, clickFlag) {
 
@@ -184,6 +243,7 @@
 
             // 标记选中的标签
             $("#_stage_tree").attr("data-choose", treeNode.id);
+//            localStorage._stage_tree_current = JSON.stringify(treeNode);
 
             // 刷新数据
             $.ajax({
@@ -251,7 +311,7 @@
                     if (data[i]['stage_id']) {
                         // 赛道
                         new_data.push({
-                            id: data[i]['stage_id'] * 100 + data[i]['map_id'],
+                            id: data[i]['stage_id'] * 1000 - (-data[i]['map_id']),
                             name: data[i]['name'],
                             stage_id: data[i]['stage_id']
                         })
@@ -293,7 +353,7 @@
                 processData: false,
                 dataType: 'text',
                 success: function (data) {
-                    alert(data);
+//                    alert(data);
                     $("#_sure_back").click();
                     $("#modal-1 button.md-close").click();
                 },
@@ -313,7 +373,7 @@
             var option = "<option></option>";
             for (var i in data) {
                 // 挑选赛事
-                if (!data[i]['stage_id']) {
+                if (!data[i]['stage_id'] && data[i]['deleted'] != 1) {
                     option += "<option value='" + data[i]['id'] + "'>" + data[i]['name'] + "</option>"
                 }
 
@@ -339,7 +399,7 @@
                     }
                 }
             }
-//            alert(map_max-(-1))
+//            alert(map_max-(-1));
             $("#modal-2").attr("data-map_id", map_max - (-1))
 
         });
@@ -356,7 +416,7 @@
             var map_id = $("#modal-2").attr("data-map_id");
 
 
-            // todo 隐藏域 赋值 map_id
+            // 隐藏域 赋值 map_id
             $("#modal-2 input[name=map_id]").val(map_id);
 
             if (!stage_id || !name || !img_1 || !img_2 || !exp || !coins) {
@@ -377,7 +437,7 @@
                 processData: false,
                 dataType: 'text',
                 success: function (data) {
-                    alert(data);
+//                    alert(data);
                     $("#_sure_back").click();
                     $("#modal-2 button.md-close").click();
                 },
@@ -389,9 +449,132 @@
             });
 
 
-        })
+        });
 
-        // 图片预览
+
+        //  删除-确定
+        $("#modal-3 button._confirm").click(function () {
+            var id = $("#_stage_tree").attr("data-choose");
+
+            $.ajax({
+                url: 'index.php?ctrl=index&act=setting_stage_delete',
+                type: 'post',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+//                    alert(data)
+                    $("#_sure_back").click();
+                    $("#modal-3 button.md-close").click();
+                },
+                error: function (data) {
+                    alert(data)
+                }
+            })
+        });
+
+
+        // todo 更改
+        $("#_stage button:contains('更改')").click(function () {
+//            alert();
+            var id = $("#_stage_tree").attr("data-choose");
+
+            if (id > 1000) {
+                // 赛段
+                $("#_map_change_button").click();
+            }
+            else if (id <= 1000) {
+//              赛事
+                $("#_stage_change_button").click();
+
+            }
+        });
+
+
+        // 赛段更改-确定
+        $("#modal-7 button._confirm").click(function () {
+
+            var name = $("#modal-7 input[name=name]").val();
+            var img_1 = $("#modal-7 input[name=img_1]").val();
+            var img_2 = $("#modal-7 input[name=img_2]").val();
+            var exp = $("#modal-7 input[name=exp]").val();
+            var coins = $("#modal-7 input[name=coins]").val();
+
+            if ( !name || !img_1 || !img_2 || !exp || !coins) {
+                $("#_error_empty").click();
+                return false;
+            }
+
+            var id = $("#_stage_tree").attr("data-choose");
+            $("#modal-7 input[name=id]").val(id);
+
+            var formData = new FormData($("#_map_change")[0]);
+
+
+            $.ajax({
+                url: 'index.php?ctrl=Index&act=setting_stage_change_map',
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: 'text',
+                success: function (data) {
+                    alert(data);
+                    $("#_sure_back").click();
+                    $("#modal-7 button.md-close").click();
+                },
+                error: function (data) {
+//                    alert(data);
+//                    $("#_error_empty").click();
+                }
+            });
+        });
+
+
+        // todo 赛事更改-确定
+        $("#modal-8 button._confirm").click(function () {
+            var name = $("#modal-8 input[name=name]").val();
+            var img_1 = $("#modal-8 input[name=img_1]").val();
+            var img_2 = $("#modal-8 input[name=img_2]").val();
+
+            if ( !name || !img_1 || !img_2) {
+                $("#_error_empty").click();
+                return false;
+            }
+
+            var id = $("#_stage_tree").attr("data-choose");
+            $("#modal-8 input[name=id]").val(id);
+
+            var formData = new FormData($("#_stage_change")[0]);
+
+
+            $.ajax({
+                url: 'index.php?ctrl=Index&act=setting_stage_change_stage',
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: 'text',
+                success: function (data) {
+                    alert(data);
+                    $("#_sure_back").click();
+                    $("#modal-8 button.md-close").click();
+                },
+                error: function (data) {
+//                    alert(data);
+//                    $("#_error_empty").click();
+                }
+            });
+        });
+
+
+
+
+            // 图片预览
         $("#modal-1 input[name=img_1]").change(function () {
             var img = this.files[0];
             var reader = new FileReader();
@@ -400,6 +583,8 @@
                 $("#_pre_img_1").attr('src', this.result)
             }
         });
+
+
         // 图片预览
         $("#modal-1 input[name=img_2]").change(function () {
             var img = this.files[0];
@@ -410,7 +595,7 @@
             }
         });
 
-        // todo
+
         // 图片预览
         $("#modal-2 input[name=img_1]").change(function () {
             var img = this.files[0];
@@ -420,6 +605,8 @@
                 $("#_pre_1").attr('src', this.result)
             }
         });
+
+
         // 图片预览
         $("#modal-2 input[name=img_2]").change(function () {
             var img = this.files[0];
@@ -427,6 +614,28 @@
             reader.readAsDataURL(img);
             reader.onload = function (e) {
                 $("#_pre_2").attr('src', this.result)
+            }
+        });
+
+
+        // 图片预览
+        $("#modal-7 input[name=img_1]").change(function () {
+            var img = this.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onload = function (e) {
+                $("#modal-7 ._pre_1").attr('src', this.result)
+            }
+        });
+
+
+        // 图片预览
+        $("#modal-7 input[name=img_2]").change(function () {
+            var img = this.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onload = function (e) {
+                $("#modal-7 ._pre_2").attr('src', this.result)
             }
         });
 

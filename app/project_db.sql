@@ -33,7 +33,7 @@ CREATE TABLE tb_player (
   locked          BOOLEAN,
   record_stage    INT(4),
   record_map      INT(4),
-  FOREIGN KEY (vip) REFEREN CES tb_vip (level)
+  FOREIGN KEY (vip) REFERENCES tb_vip (level)
 );
 INSERT INTO tb_player (username, password, vip, coins, exp, sign_time, last_login_time, money_charged, locked, record_stage, record_map)
 VALUES
@@ -96,22 +96,38 @@ INSERT INTO tb_menu VALUES
 
 # 商品
 CREATE TABLE tb_equip (
-  id         INT(4) PRIMARY KEY,
+  id         INT(4) PRIMARY KEY AUTO_INCREMENT,
   name       VARCHAR(8),
-  img_1      VARCHAR(32),
-  img_2      VARCHAR(32),
+  img_1      VARCHAR(64),
+  img_2      VARCHAR(64),
   func_value INT(4) NOT NULL,
-  type       VARCHAR(8)
+  type       VARCHAR(8),
+  vip VARCHAR(8),
+  deleted BOOLEAN
 );
-INSERT INTO tb_equip VALUES
-  (1, '车手1', '', '', 100, 'biker'),
-  (2, '车手1', '', '', 100, 'biker'),
-  (3, '车手1', '', '', 100, 'biker'),
-  (4, '车手1', '', '', 100, 'biker'),
-  (5, '车手1', '', '', 100, 'biker'),
-  (6, '车手1', '', '', 100, 'biker'),
-  (7, '车手1', '', '', 100, 'biker'),
-  (8, '车手1', '', '', 100, 'biker');
+INSERT INTO tb_equip (id, name, img_1, img_2, func_value, type, vip, deleted) VALUES
+  (1, '车手1', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (2, '车手2', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (3, '车手3', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (4, '车手4', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (5, '车手5', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (6, '车手6', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (7, '车手7', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (8, '车手8', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (9, '车手9', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (10, '车身1', '', '../game/app/static/img/moto/m1.png', 100, 'moto', 'vip1', 0),
+  (11, '车身2', '', '', 100, 'moto', 'vip1', 0),
+  (12, '车身3', '', '', 100, 'moto', 'vip1', 0),
+  (13, '车身4', '', '', 100, 'moto', 'vip1', 0),
+  (14, '车身5', '', '', 100, 'moto', 'vip1', 0),
+  (15, '引擎1', '', '', 100, 'engine', 'vip1', 0),
+  (16, '引擎2', '', '', 100, 'engine', 'vip1', 0),
+  (17, '引擎3', '', '', 100, 'engine', 'vip1', 0),
+  (18, '引擎4', '', '', 100, 'engine', 'vip1', 0),
+  (19, '车轮1', '', '', 100, 'wheel', 'vip1', 0),
+  (20, '车轮2', '', '', 100, 'wheel', 'vip1', 0),
+  (21, '车轮3', '', '', 100, 'wheel', 'vip1', 0);
+
 
 
 # 用户购买记录

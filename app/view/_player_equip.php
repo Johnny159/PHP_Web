@@ -7,15 +7,15 @@
  */
 
 $tr = "";
-foreach($data as $item){
-    $tr.= "<tr>";
-    foreach($item as $key => $val){
-        $tr.= "<td>";
-        $tr.= $val;
-        $tr.= "</td>";
+foreach ($data as $item) {
+    $tr .= "<tr>";
+    foreach ($item as $key => $val) {
+        $tr .= "<td>";
+        $tr .= $val;
+        $tr .= "</td>";
 
     }
-    $tr.= "</tr>";
+    $tr .= "</tr>";
 
 }
 
@@ -30,7 +30,7 @@ $html = <<<EOD
             </tr>
             {$tr}
         </table>
-        <span>总计{$page -> row_count}条 共{$page -> page_count}页 当前第{$page -> page_current}页 </span>
+        <span>总计{$page->row_count}条 共{$page->page_count}页 当前第{$page->page_current}页 </span>
 
 EOD;
 
@@ -45,7 +45,6 @@ if (!$_GET['page_current'] or $_GET['page_current'] == 1) {
 }
 
 
-
 // 下一页
 if (!$_GET['page_current']) {
     echo "<button><a href='index.php?ctrl=Index&act=player_equip&page_current=" . (2) . "'>下一页</a></button>";
@@ -53,3 +52,77 @@ if (!$_GET['page_current']) {
     echo "<button><a href='index.php?ctrl=Index&act=player_equip&page_current=" . ($_GET['page_current'] + 1) . "'>下一页</a></button>";
 }
 ?>
+<!--<link rel="stylesheet" type="text/css" href="./view/index_view/css/demo.css"/>-->
+
+<link rel="stylesheet" type="text/css" href="./view/_modal_window/css/style.css"/>
+<style>
+    a {
+        text-decoration: none;
+        color: #cecece;
+        outline: none;
+    }
+
+    * {
+        font-family: '微软雅黑 Light';
+        text-align: center;
+    }
+
+    body {
+        vertical-align: top;
+    }
+
+    div {
+        display: inline-block;
+    }
+
+    #_iframe {
+        width: 100%;
+        height: 400px;
+        color: #cecece;
+        text-align: center;
+    }
+
+    #_iframe img {
+        margin: 0 auto;
+    }
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    table {
+
+        margin: 20px auto;
+    }
+
+    table a {
+        color: #333333;
+        cursor: pointer;
+    }
+
+    table.gridtable {
+        font-size: 11px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+    }
+
+    table.gridtable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #cecece;
+    }
+
+    table.gridtable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #ffffff;
+    }
+</style>

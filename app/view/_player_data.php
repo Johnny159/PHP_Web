@@ -23,5 +23,7 @@ echo $html;
 
 
 ?>
+<link rel="stylesheet" type="text/css" href="./view/_modal_window/css/style.css"/>
+
 
 

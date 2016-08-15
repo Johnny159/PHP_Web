@@ -169,13 +169,13 @@ class Index_Model extends Model
     {
         $data_1 = $this->db->select(
             "*",
-            "tb_stage",
-            "deleted <> 1"
+            "tb_stage"
         );
         $data_2 = $this->db->select(
             "*",
-            "tb_map",
-            "deleted <> 1"
+            "tb_map"
+        // 为了完整判断map_id的最大值 保留已删除项目
+
         );
         $data = array_merge($data_1, $data_2);
         return $data;
@@ -198,7 +198,6 @@ class Index_Model extends Model
                 "*",
                 "tb_stage",
 //                "id={$id} and deleted <> 1"
-                // 为了完整判断map_id的最大值 保留已删除项目
                 "id={$id}"
             );
         }
@@ -224,6 +223,100 @@ class Index_Model extends Model
             "tb_map",
             "name, img_1, img_2, deleted, stage_id, exp, coins, map_id",
             "'{$name}', '{$img_1}', '{$img_2}', 0 ,{$stage_id}, {$exp}, {$coins}, {$map_id}"
+        );
+        return $data;
+    }
+
+    function setting_stage_delete_map($stage_id, $map_id)
+    {
+        $data = $this->db->update(
+            "tb_map",
+            "deleted = 1 ",
+            "stage_id = {$stage_id} and map_id = {$map_id}"
+        );
+        return $data;
+    }
+
+    function setting_stage_delete_stage($id)
+    {
+        $data = $this->db->update(
+            "tb_stage",
+            "deleted = 1 ",
+            "id = {$id}"
+        );
+        $data0 = $this->db->update(
+            "tb_map",
+            "deleted = 1 ",
+            "stage_id = {$id}"
+        );
+        return $data;
+    }
+
+    function setting_stage_change_map($name, $img_1, $img_2, $exp, $coins, $stage_id, $map_id)
+    {
+        $data = $this->db->update(
+            "tb_map",
+            "name = '{$name}', exp = {$exp}, img_1 ='{$img_1}',img_2 ='{$img_2}', coins ={$coins}",
+            "stage_id = {$stage_id} and map_id = {$map_id}"
+        );
+        return $data;
+    }
+
+    function setting_stage_change_stage($id, $name, $img_1, $img_2)
+    {
+        $data = $this->db->update(
+            "tb_stage",
+            "name = '{$name}', img_1 ='{$img_1}',img_2 ='{$img_2}'",
+            "id = {$id} "
+        );
+        return $data;
+    }
+
+    function setting_item()
+    {
+
+        $data = $this->db->select(
+            "*",
+            "tb_equip"
+        );
+        return $data;
+    }
+
+    function setting_item_search($id)
+    {
+        $data = $this->db->select(
+            "*",
+            "tb_equip",
+            "id = {$id}"
+        );
+        return $data;
+    }
+
+    function setting_item_insert($vip, $img_1, $img_2, $type, $func_value, $name)
+    {
+        $data = $this->db->insert(
+            "tb_equip",
+            "name, img_1, img_2, vip, type, func_value, deleted",
+            "'{$name}', '{$img_1}', '{$img_2}',  '{$vip}', '{$type}', {$func_value}, 0"
+        );
+        return $data;
+    }
+
+    function setting_item_delete($id)
+    {
+        $data = $this->db->update(
+            "tb_equip",
+            "deleted = 1 ",
+            "id = {$id}"
+        );
+        return $data;
+    }
+
+    function setting_item_update($name, $img_1, $img_2, $id, $func_value, $vip){
+        $data = $this->db->update(
+            "tb_equip",
+            "name = '{$name}', img_1 ='{$img_1}',img_2 ='{$img_2}', func_value={$func_value}, vip='{$vip}'",
+            "id = {$id} "
         );
         return $data;
     }
