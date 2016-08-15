@@ -102,32 +102,30 @@ CREATE TABLE tb_equip (
   img_2      VARCHAR(64),
   func_value INT(4) NOT NULL,
   type       VARCHAR(8),
-  vip VARCHAR(8),
-  deleted BOOLEAN
+  vip        VARCHAR(8),
+  deleted    BOOLEAN
 );
 INSERT INTO tb_equip (id, name, img_1, img_2, func_value, type, vip, deleted) VALUES
-  (1, '车手1', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
-  (2, '车手2', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
-  (3, '车手3', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
-  (4, '车手4', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
-  (5, '车手5', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
-  (6, '车手6', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
-  (7, '车手7', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
-  (8, '车手8', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
-  (9, '车手9', '', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
-  (10, '车身1', '', '../game/app/static/img/moto/m1.png', 100, 'moto', 'vip1', 0),
-  (11, '车身2', '', '', 100, 'moto', 'vip1', 0),
-  (12, '车身3', '', '', 100, 'moto', 'vip1', 0),
-  (13, '车身4', '', '', 100, 'moto', 'vip1', 0),
-  (14, '车身5', '', '', 100, 'moto', 'vip1', 0),
-  (15, '引擎1', '', '', 100, 'engine', 'vip1', 0),
-  (16, '引擎2', '', '', 100, 'engine', 'vip1', 0),
-  (17, '引擎3', '', '', 100, 'engine', 'vip1', 0),
-  (18, '引擎4', '', '', 100, 'engine', 'vip1', 0),
-  (19, '车轮1', '', '', 100, 'wheel', 'vip1', 0),
-  (20, '车轮2', '', '', 100, 'wheel', 'vip1', 0),
-  (21, '车轮3', '', '', 100, 'wheel', 'vip1', 0);
-
+  (1, '车手1', '../game/app/static/img/biker/c1s.png', '../game/app/static/img/biker/c1.png', 100, 'biker', 'vip1', 0),
+  (2, '车手2', '../game/app/static/img/biker/c2s.png', '../game/app/static/img/biker/c2.png', 100, 'biker', 'vip1', 0),
+  (3, '车手3', '../game/app/static/img/biker/c3s.png', '../game/app/static/img/biker/c3.png', 100, 'biker', 'vip1', 0),
+  (4, '车手4', '../game/app/static/img/biker/c4s.png', '../game/app/static/img/biker/c4.png', 100, 'biker', 'vip1', 0),
+  (5, '车手5', '../game/app/static/img/biker/c5s.png', '../game/app/static/img/biker/c5.png', 100, 'biker', 'vip1', 0),
+  (6, '车手6', '../game/app/static/img/biker/c6s.png', '../game/app/static/img/biker/c6.png', 100, 'biker', 'vip1', 0),
+  (7, '车手7', '../game/app/static/img/biker/c7s.png', '../game/app/static/img/biker/c7.png', 100, 'biker', 'vip1', 0),
+  (8, '车手8', '../game/app/static/img/biker/c8s.png', '../game/app/static/img/biker/c8.png', 100, 'biker', 'vip1', 0),
+  (11, '车身1', '../game/app/static/img/moto/m1s.png', '../game/app/static/img/moto/m1.png', 100, 'moto', 'vip1', 0),
+  (12, '车身2', '../game/app/static/img/moto/m2s.png', '../game/app/static/img/moto/m2.png', 100, 'moto', 'vip1', 0),
+  (13, '车身3', '../game/app/static/img/moto/m3s.png', '../game/app/static/img/moto/m3.png', 100, 'moto', 'vip1', 0),
+  (14, '车身4', '../game/app/static/img/moto/m4s.png', '../game/app/static/img/moto/m4.png', 100, 'moto', 'vip1', 0),
+  (15, '引擎1', '', '../game/app/static/img/engine/engine1.png', 100, 'engine', 'vip1', 0),
+  (16, '引擎2', '', '../game/app/static/img/engine/engine2.png', 100, 'engine', 'vip1', 0),
+  (17, '引擎3', '', '../game/app/static/img/engine/engine3.png', 100, 'engine', 'vip1', 0),
+  (18, '引擎4', '', '../game/app/static/img/engine/engine4.png', 100, 'engine', 'vip1', 0),
+  (19, '车轮1', '../game/app/static/img/wheel/w1s.png', '../game/app/static/img/wheel/w1.png', 100, 'wheel', 'vip1', 0),
+  (20, '车轮2', '../game/app/static/img/wheel/w2s.png', '../game/app/static/img/wheel/w2.png', 100, 'wheel', 'vip1', 0),
+  (21, '车轮3', '../game/app/static/img/wheel/w3s.png', '../game/app/static/img/wheel/w3.png', 100, 'wheel', 'vip1', 0),
+  (22, '车轮4', '../game/app/static/img/wheel/w4s.png', '../game/app/static/img/wheel/w4.png', 100, 'wheel', 'vip1', 0);
 
 
 # 用户购买记录
@@ -247,8 +245,8 @@ CREATE TABLE tb_map (
   img_1    VARCHAR(64),
   img_2    VARCHAR(64),
   deleted  BOOLEAN,
-  exp int(8),
-  coins int(8),
+  exp      INT(8),
+  coins    INT(8),
   PRIMARY KEY (stage_id, map_id),
   FOREIGN KEY (stage_id) REFERENCES tb_stage (id)
 );

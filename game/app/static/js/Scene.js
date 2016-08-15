@@ -61,15 +61,7 @@ function LoginScene() {
                     required: true,
                     minlength: 6,
                     maxlength: 12,
-                    remote:{
-                        // todo validate + ajax 验证
-                        url: "username_check.php?action=check&username="+$("[name=username]").val(),
-                        type:"get",
-                        dataType:"text",
-                        dataFilter: function(data){
-                            return data=="OK";
-                        }
-                    }
+
                 },
                 password: {
                     required: true,
@@ -88,19 +80,7 @@ function LoginScene() {
             }
         });
 
-        //$("input[name=username]").blur(function(){
-        //    var xmlhttp = new XMLHttpRequest();
-        //    xmlhttp.open("get", "username_check.php?action=check&username="+$("[name=username]").val(), true);
-        //
-        //    if($("#username-error").length == 0 || $("#username-error").html() == ""){
-        //        //alert(123);
-        //        xmlhttp.send();
-        //        xmlhttp.onreadystatechange = function(){
-        //            //alert(this.responseText);
-        //            $("#username-error").html(this.responseText).show();
-        //        }
-        //    }
-        //});
+
 
         // 注册
         $(_login_center_box).children("img:eq(3)").click(function () {
@@ -190,11 +170,12 @@ function SignScene() {
                     maxlength: 12,
                     remote:{
                         // todo validate + ajax 验证
-                        url: "username_check.php?action=sign&username="+$("[name=username]").val(),
+                        url: "../app/index.php?ctrl=game&act=sign_name_check&username="+$("[name=username]").val(),
                         type:"get",
                         dataType:"text",
                         dataFilter: function(data){
-                            return data=="";
+                            console.log(data);
+                            return data==1;
                         }
                     }
                 },

@@ -168,7 +168,8 @@
                 director.runScene(loginScene);
             });
 
-            signScene.bind("signSuccess", function (e, form) {
+            // 注册 JS
+            signScene.bind("signSuccess1", function (e, form) {
                 var username = $(form).children("input[name=username]").val();
                 var password = $(form).children("input[name=password1]").val();
 
@@ -196,6 +197,42 @@
                         director.runScene(loginScene);
                     }
                 });
+            });
+
+            // 注册 PHP
+            signScene.bind("signSuccess", function (e, form) {
+                var username = $(form).children("input[name=username]").val();
+                var password = $(form).children("input[name=password1]").val();
+
+                $.ajax({
+
+                })
+
+
+//                user.select(['*', "username='" + username + "'"], function (result) {
+//
+//                    console.log("查找用户名结果数|注册：" + result.rows.length);
+//
+//                    if (result.rows.length != 0) {
+//                        alert("该账号名已被使用");
+//                    }
+//                    else if (result.rows.length == 0) {
+//
+//                        user.insert([
+//                            username,
+//                            password,
+//                            username,
+//                            1000,
+//                            99,
+//                            '[[2],[101],[201],[301]]',
+//                            '[2, 102, 202, 302]',
+//                            JSON.stringify(save_list)
+//                        ]);
+//                        alert("注册成功,将跳转至登陆界面");
+//                        director.runScene(loginScene);
+//                    }
+//                });
+
             });
 
 
